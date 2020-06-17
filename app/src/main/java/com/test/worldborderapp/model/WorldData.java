@@ -1,5 +1,7 @@
 package com.test.worldborderapp.model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.test.worldborderapp.util.FetchData;
@@ -19,6 +21,7 @@ public class WorldData {
     JSONArray jArray;
     static ArrayList<Country> countries;
     static Map<String, Integer> alpha3ToIndex;
+    public static final String DATA_IS_READY = "com.test.worldborderapp.model.DATA_IS_READY";
     public ArrayList<Country> getList() {
         return  countries;
     }
@@ -37,7 +40,7 @@ public class WorldData {
 
         return countries.get(index).getName();
     }
-    public WorldData() {
+    public WorldData(Context context) {
         String data = FetchData.fetch();
         try {
             Log.i(TAG, "WorldData: data " + data);
@@ -77,9 +80,8 @@ public class WorldData {
             }
             countries.add(new Country(name, nativeName,alpha3Code, tempBordersCountries, area));
         }
-        for (Country country : countries) {
-            Log.i(TAG, "country.toString" + country.toString());
-        }
+        Intent intent = new Intent(DATA_IS_READY);
+        context.sendBroadcast(intent);
     }
 
     public static void sortByArea( ) {

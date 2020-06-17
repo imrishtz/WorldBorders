@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.worldborderapp.R;
-import com.test.worldborderapp.model.Country;
 import com.test.worldborderapp.model.WorldData;
-
-import java.util.ArrayList;
 
 public class CountriesFragment extends Fragment {
 

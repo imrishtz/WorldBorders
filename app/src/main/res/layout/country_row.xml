@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="57dp"
+    android:layout_height="80dp"
     android:gravity="center">
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="78dp"
         android:gravity="center">
         <TextView
             android:id="@+id/country_name"
@@ -19,12 +19,13 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="0.5" >
+            android:layout_weight="0.2" >
         </Space>
         <TextView
             android:text="country_native_name"
             android:id="@+id/country_native_name"
             android:textSize="18sp"
+            android:gravity="center"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
@@ -37,6 +38,7 @@
         <TextView
             android:text="area"
             android:id="@+id/country_area"
+            android:gravity="center"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
@@ -46,4 +48,5 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/colorAccent"></ImageView>
+
 </LinearLayout>

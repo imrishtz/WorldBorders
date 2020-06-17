@@ -2,6 +2,7 @@ package com.test.worldborderapp.view;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class BordersFragment extends Fragment  {
     TextView mNameTv;
     TextView mNativeNameTv;
     ListView mBorderingCountriesLv;
-
+    TextView noBorders;
 
     String mName;
     String mNativeName;
@@ -43,8 +44,14 @@ public class BordersFragment extends Fragment  {
         mNameTv.setText(mName);
         mNativeNameTv.setText(mNativeName);
         Log.i("a", "onCreateView: imri"  + mBorderingCountries);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, mBorderingCountries);
-        mBorderingCountriesLv.setAdapter(arrayAdapter);
+        if (mBorderingCountries.isEmpty()) {
+            noBorders = view.findViewById(R.id.borders_header);
+            noBorders.setText("This country have no bordering countries");
+            noBorders.setGravity(Gravity.CENTER);
+        } else {
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, mBorderingCountries);
+            mBorderingCountriesLv.setAdapter(arrayAdapter);
+        }
 
         return view;
     }
