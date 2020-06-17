@@ -41,16 +41,26 @@ public class CountriesFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         Button sortByArea = view.findViewById(R.id.sort_by_area);
-        sortByArea.setOnClickListener(new SortOnClickListener());
+        sortByArea.setOnClickListener(new SortByAreaOnClickListener());
+        Button sortByName = view.findViewById(R.id.sort_by_name);
+        sortByName.setOnClickListener(new SortByNameClickListener());
+
         return view;
     }
     CountriesFragment(WorldData data) {
         this.data = data;
     }
-    class SortOnClickListener implements View.OnClickListener {
+    class SortByAreaOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             WorldData.sortByArea();
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+    class SortByNameClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            WorldData.sortByNameAbc();
             mAdapter.notifyDataSetChanged();
         }
     }
