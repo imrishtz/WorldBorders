@@ -49,8 +49,7 @@ public class CountriesFragment extends Fragment {
     class SortOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            data.sortBy;
-            recyclerView
+
         }
     }
 }
