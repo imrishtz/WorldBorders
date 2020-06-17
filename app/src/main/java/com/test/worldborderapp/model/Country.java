@@ -1,9 +1,6 @@
 package com.test.worldborderapp.model;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Country {
 
@@ -36,16 +33,5 @@ public class Country {
 
     public int getArea() {
         return area;
-    }
-
-    @Override
-    public String toString() {
-        return "Country{" +
-                "alpha3code='" + alpha3code + '\'' +
-                ", name='" + name + '\'' +
-                ", nativeName='" + nativeName + '\'' +
-                ", borderingCountriesAlpha3=" + borderingCountriesAlpha3.toString() +
-                ", area=" + area +
-                '}';
     }
 }

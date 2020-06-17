@@ -17,11 +17,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WorldData {
-    private static final String TAG = "WorldData";
-    JSONArray jArray;
-    static ArrayList<Country> countries;
-    static Map<String, Integer> alpha3ToIndex;
+    private JSONArray jArray;
+    private static ArrayList<Country> countries;
+    private static Map<String, Integer> alpha3ToIndex;
     public static final String DATA_IS_READY = "com.test.worldborderapp.model.DATA_IS_READY";
+    private static WorldData worldDataInstance;
+    public static WorldData getInstance(Context context) {
+        if (worldDataInstance == null) {
+            worldDataInstance = new WorldData(context);
+        }
+        return worldDataInstance;
+    }
+
     public ArrayList<Country> getList() {
         return  countries;
     }
@@ -34,22 +41,17 @@ public class WorldData {
         }
         return ret;
     }
-    static public String getNameFromAlpha3Code(String alpha3Code) {
+    static private String getNameFromAlpha3Code(String alpha3Code) {
         int index = alpha3ToIndex.get(alpha3Code);
-        Log.i(TAG, "getNameFromAlpha3Code: imri" + index);
-
-        return countries.get(index).getName();
+         return countries.get(index).getName();
     }
-    public WorldData(Context context) {
+    private WorldData(Context context) {
         String data = FetchData.fetch();
         try {
-            Log.i(TAG, "WorldData: data " + data);
             jArray = new JSONArray(data);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.i(TAG, "WorldData: " + jArray.toString());
         countries = new ArrayList<>();
         alpha3ToIndex = new HashMap<>();
 
@@ -69,7 +71,6 @@ public class WorldData {
                     tempBordersCountries.add(bordersJSON.getString(j));
                 }
                 alpha3ToIndex.put(alpha3Code, i);
-                Log.i(TAG, "WorldData: imri alpha3Code" + alpha3Code + " i =" + i);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -88,11 +89,10 @@ public class WorldData {
         Collections.sort(countries, new Comparator<Country>() {
             @Override
             public int compare(Country lhs, Country rhs) {
-                // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
                 return lhs.getArea() > rhs.getArea() ? -1 : 1;
             }
         });
-        Integer index = 0;
+        int index = 0;
         for (Country country :countries) {
             alpha3ToIndex.put(country.getAlpha3code(), index++);
         }
@@ -104,7 +104,7 @@ public class WorldData {
                 return lhs.getName().compareTo(rhs.getName());
             }
         });
-        Integer index = 0;
+        int index = 0;
         for (Country country :countries) {
             alpha3ToIndex.put(country.getAlpha3code(), index++);
         }

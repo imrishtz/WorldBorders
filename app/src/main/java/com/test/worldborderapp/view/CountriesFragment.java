@@ -14,29 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.worldborderapp.R;
 import com.test.worldborderapp.model.WorldData;
+import com.test.worldborderapp.presenter.CountriesPresenter;
 
 public class CountriesFragment extends Fragment {
 
-    private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter mAdapter;
-    RecyclerView recyclerView;
-    private WorldData data;
+    private CountriesPresenter countriesPresenter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.countries, container, false);
-        recyclerView =  view.findViewById(R.id.countries_list);
+        RecyclerView recyclerView =  view.findViewById(R.id.countries_list);
         recyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter (see also next example)
-        mAdapter = new CountriesAdapter(data.getList(), getFragmentManager());
+        mAdapter = new CountriesAdapter(countriesPresenter.getCountriesList(), getFragmentManager());
         recyclerView.setAdapter(mAdapter);
-
         Button sortByArea = view.findViewById(R.id.sort_by_area);
         sortByArea.setOnClickListener(new SortByAreaOnClickListener());
         Button sortByName = view.findViewById(R.id.sort_by_name);
@@ -44,20 +38,20 @@ public class CountriesFragment extends Fragment {
 
         return view;
     }
-    CountriesFragment(WorldData data) {
-        this.data = data;
+    CountriesFragment(CountriesPresenter countriesPresenter) {
+        this.countriesPresenter = countriesPresenter;
     }
     class SortByAreaOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            WorldData.sortByArea();
+            countriesPresenter.sortByArea();
             mAdapter.notifyDataSetChanged();
         }
     }
     class SortByNameClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            WorldData.sortByNameAbc();
+            countriesPresenter.sortByName();
             mAdapter.notifyDataSetChanged();
         }
     }
