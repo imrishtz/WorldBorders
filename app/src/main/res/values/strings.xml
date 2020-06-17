@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">WorldBorderApp</string>
+    <string name="sort_by_name">Sort by Name</string>
+    <string name="sort_by_area">Sort by Area</string>
+
+</resources>
