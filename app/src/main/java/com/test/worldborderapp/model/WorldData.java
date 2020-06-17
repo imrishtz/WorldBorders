@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,6 +79,32 @@ public class WorldData {
         }
         for (Country country : countries) {
             Log.i(TAG, "country.toString" + country.toString());
+        }
+    }
+
+    public static void sortByArea( ) {
+        Collections.sort(countries, new Comparator<Country>() {
+            @Override
+            public int compare(Country lhs, Country rhs) {
+                // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+                return lhs.getArea() > rhs.getArea() ? -1 : 1;
+            }
+        });
+        Integer index = 0;
+        for (Country country :countries) {
+            alpha3ToIndex.put(country.getAlpha3code(), index++);
+        }
+    }
+    public static void sortByNameAbc( ) {
+        Collections.sort(countries, new Comparator<Country>() {
+            @Override
+            public int compare(Country lhs, Country rhs) {
+                return lhs.getName().compareTo(rhs.getName());
+            }
+        });
+        Integer index = 0;
+        for (Country country :countries) {
+            alpha3ToIndex.put(country.getAlpha3code(), index++);
         }
     }
 }

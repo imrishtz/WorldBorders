@@ -22,13 +22,14 @@ public class CountriesFragment extends Fragment {
 
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter mAdapter;
+    RecyclerView recyclerView;
     private WorldData data;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.countries, container, false);
-        RecyclerView recyclerView =  view.findViewById(R.id.countries_list);
+        recyclerView =  view.findViewById(R.id.countries_list);
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
@@ -49,7 +50,8 @@ public class CountriesFragment extends Fragment {
     class SortOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            WorldData.sortByArea();
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
