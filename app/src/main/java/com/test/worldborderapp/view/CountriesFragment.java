@@ -55,4 +55,5 @@ public class CountriesFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
     }
+
 }

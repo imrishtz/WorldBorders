@@ -6,9 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         IntentFilter intentFilter = new IntentFilter(WorldData.DATA_IS_READY);
         registerReceiver(CountriesReadyReceiver, intentFilter);
+        Log.i("d", "onCreate: imri");
         countriesPresenter = new CountriesPresenter(this);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("please wait");
